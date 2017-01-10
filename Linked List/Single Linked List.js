@@ -2,11 +2,6 @@
  * Created by kumars on 09/01/17.
  */
 
-/**
- * Created by kumars on 09/01/17.
- */
-
-
 var Node = function(value) {
     this.data = value;
     this.next = null;
@@ -57,6 +52,7 @@ SList.prototype.traverse = function(){
 
 // Traversing a LL, when the number of total nodes in LL is known
 SList.prototype.traverseUsingSizeCounter = function(){
+    //  To do : include a case when the list is empty .
     var count = 0,
         currNode = this.head,
         size = this.size;
@@ -68,13 +64,46 @@ SList.prototype.traverseUsingSizeCounter = function(){
     }
 };
 
+/**
+ * Removes node at given index. We get the previous node before the node which is to be deleted,
+ * and from that previous node, we changes the next to make a refernce to the deleted node next node.
+ */
+
+SList.prototype.removeNodeAtIndex = function(index) {
+    var count = 1,
+        currNode = this.head,
+        head = this.head,
+        size = this.size;
+
+    if (index <= 0 || index > size) {
+        console.log('Please check the value of index that you have entered');
+    }
+
+    if (index === 1 ) {  // first node to be removed
+        this.head = head.next;
+    }
+
+    while (count !== index - 1) {
+        currNode = currNode.next;
+        count++;
+    }
+    // currNode, now refers to just the previous node prior to the node which is to be deleted.
+
+    currNode.next = currNode.next.next;
+    this.size--;
+};
+
 var sl = new SList();
-sl.insertAfter(3);
-sl.insertAfter(5);
-sl.insertAfter(8);
-sl.insertAfter(10);
+sl.insertAfter(11);
+sl.insertAfter(22);
+sl.insertAfter(33);
+sl.insertAfter(44);
 
 //sl.traverse();
+console.log('The list is now :::'+'\n');
 sl.traverseUsingSizeCounter();
 
+sl.removeNodeAtIndex(3);
+console.log('After node deletion, the list is now :::');
+sl.traverseUsingSizeCounter()
 
