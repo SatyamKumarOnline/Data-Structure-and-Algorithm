@@ -2,9 +2,9 @@
  * Created by kumars on 09/01/17.
  */
 
-var Node = function(value) {
+var Node = function(value, next) {
     this.data = value;
-    this.next = null;
+    this.next = next || null;
 };
 
 var SList = function() {
@@ -31,6 +31,55 @@ SList.prototype.insertAfter = function(value) {
     this.size++;
 };
 
+
+// push_front(value) - adds an item to the front of the list
+
+SList.prototype.pushFront = function(key) {
+    // to do : add code for empty list and when only one node is there .
+    //create a new node
+    var node = new Node(key);
+    node.next = this.head; // new node, which is inserted from front references to the node which is at front now.
+    this.head = node; // head poitns to new node
+    this.size++;
+};
+
+// insert(index, value) - insert value at index, so current item at that index is pointed to by new item at index
+
+SList.prototype.insert = function(index,value) {
+  var count = 1,
+      currNode = this.head;
+
+    // index is 1 i.e first item.
+
+    if (index === 1) {
+        this.head = new Node(value, this.head);
+        this.size++;
+        return;
+    }
+
+      while (count != index -1) { // get the previous node before which u want to insert
+        currNode = currNode.next;
+        count++;
+    }
+    //  Now, we are at  the previous node before which we want to insert, index of this node is index -1 .
+
+    currNode.next = new Node(value, currNode.next);
+    this.size++;
+
+};
+
+// another way of implementing push_front(value) - adds an item to the front of the list
+
+SList.prototype.pushFront1 = function(key) {
+    // to do : add code for empty list and when only one node is there .
+    /*****
+     * The head now points to new node. The param (this.head) in the new Node, refers to the head which
+     * was referincing to the intial first node.
+     * @type {Node}
+     */
+    this.head = new Node(key, this.head);
+    this.size++;
+};
 
 // Traversing a LL and print the corresponding values
 
@@ -94,16 +143,6 @@ SList.prototype.removeNodeAtIndex = function(index) {
 };
 
 var sl = new SList();
-sl.insertAfter(11);
-sl.insertAfter(22);
-sl.insertAfter(33);
-sl.insertAfter(44);
 
-//sl.traverse();
-console.log('The list is now :::'+'\n');
-sl.traverseUsingSizeCounter();
 
-sl.removeNodeAtIndex(3);
-console.log('After node deletion, the list is now :::');
-sl.traverseUsingSizeCounter()
 
