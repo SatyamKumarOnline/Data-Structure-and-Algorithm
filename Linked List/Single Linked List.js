@@ -81,6 +81,20 @@ SList.prototype.pushFront1 = function(key) {
     this.size++;
 };
 
+// pop_front() - remove front item and return its value
+
+SList.prototype.popFront = function() {
+    var head = this.head;
+    if (head == null) { // Empty List
+        console.log('Pop operation cannot be performed. List is empty');
+    }
+    var value = head.data;
+    this.head = head.next;
+    this.size--;
+    return value;
+
+};
+
 // Traversing a LL and print the corresponding values
 
 
