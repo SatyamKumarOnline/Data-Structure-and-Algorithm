@@ -156,7 +156,32 @@ SList.prototype.removeNodeAtIndex = function(index) {
     this.size--;
 };
 
+// Reverse a SLL, so that nodes point is reverse direction.
+SList.prototype.reverse = function() {
+    // To do :- implement recursively and consider implementing different edge cases
+
+    var currNode = this.head,
+        nextNode = prevNode = null;
+
+    while (currNode.next != null) {
+        nextNode = currNode.next;
+        currNode.next = prevNode;
+        prevNode = currNode;
+        currNode = nextNode;
+    }
+    currNode.next = prevNode;
+    this.head = currNode;
+};
+
 var sl = new SList();
+
+
+sl.insertAfter(11);
+sl.insertAfter(22);
+sl.insertAfter(33);
+sl.insertAfter(44);
+
+
 
 
 
